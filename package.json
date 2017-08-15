@@ -1,0 +1,30 @@
+{
+  "name": "tree-utils",
+  "version": "0.0.1",
+  "description": "Misc tree utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojule/tree-utils.git"
+  },
+  "keywords": [],
+  "author": "Nik Coughlin <nrkn.com@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mojule/tree-utils/issues"
+  },
+  "homepage": "https://github.com/mojule/tree-utils#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "jsdom": "^11.1.0",
+    "mocha": "^3.5.0"
+  },
+  "dependencies": {
+    "@mojule/dom-utils": "^0.1.2",
+    "@mojule/is": "^0.1.9"
+  }
+}
