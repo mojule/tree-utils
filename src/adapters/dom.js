@@ -32,7 +32,7 @@ const getValue = node => {
   return { nodeType }
 }
 
-const getChildren = node => node.childNodes ? Array.from( node.childNodes ) : []
+const getChildren = node => Array.from( node.childNodes )
 
 const appendChild = ( node, child ) => node.appendChild( child )
 

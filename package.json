@@ -1,6 +1,6 @@
 {
-  "name": "tree-utils",
-  "version": "0.0.1",
+  "name": "@mojule/tree-utils",
+  "version": "0.1.0",
   "description": "Misc tree utils",
   "main": "index.js",
   "scripts": {

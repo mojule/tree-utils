@@ -1,29 +1,51 @@
 'use strict'
 
-const ObjectAdapter = () =>({
-  getValue: node => node.value,
-  getChildren: node => node.children,
-  createNode: value => ({
-    value,
-    children: []
-  }),
-  appendChild: ( node, child ) => node.children.push( child ),
-  removeChild: ( node, child ) => {
-    const index = node.children.indexOf( child )
+const parentSymbol = require( '../parent-symbol' )
 
-    if( index === -1 )
-      throw Error( 'child not found in node' )
+const ObjectAdapter = () => {
+  const adapter = {
+    getValue: node => node.value,
+    getChildren: node => node.children,
+    createNode: value => ({
+      value,
+      children: []
+    }),
+    appendChild: ( node, child ) => {
+      if( child[ parentSymbol ] )
+        adapter.removeChild( child[ parentSymbol ], child )
 
-    node.children.splice( index, 1 )
-  },
-  insertBefore: ( node, child, reference ) => {
-    const index = node.children.indexOf( reference )
+      node.children.push( child )
 
-    if( index === -1 )
-      throw Error( 'reference not found in node' )
+      child[ parentSymbol ] = node
 
-    node.children.splice( index, 0, child )
+      return child
+    },
+    removeChild: ( node, child ) => {
+      const index = node.children.indexOf( child )
+
+      if( index === -1 )
+        throw Error( 'child not found in node' )
+
+      child[ parentSymbol ] = null
+
+      node.children.splice( index, 1 )
+    },
+    insertBefore: ( node, child, reference ) => {
+      const index = node.children.indexOf( reference )
+
+      if( index === -1 )
+        throw Error( 'reference not found in node' )
+
+      if( child[ parentSymbol ] )
+        adapter.removeChild( child[ parentSymbol ], child )
+
+      child[ parentSymbol ] = node
+
+      node.children.splice( index, 0, child )
+    }
   }
-})
+
+  return adapter
+}
 
 module.exports = ObjectAdapter
