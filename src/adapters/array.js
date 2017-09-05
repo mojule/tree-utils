@@ -39,6 +39,19 @@ const ArrayAdapter = () => {
       child[ parentSymbol ] = node
 
       node.splice( index, 0, child )
+    },
+    insertAfter: ( node, child, reference ) => {
+      const index = node.indexOf( reference )
+
+      if( index === -1 )
+        throw Error( 'reference not found in node' )
+
+      if( child[ parentSymbol ] )
+        adapter.removeChild( child[ parentSymbol ], child )
+
+      child[ parentSymbol ] = node
+
+      node.splice( index + 1, 0, child )
     }
   }
 

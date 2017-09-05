@@ -41,6 +41,9 @@ const removeChild = ( node, child ) => node.removeChild( child )
 const insertBefore = ( node, child, reference ) =>
   node.insertBefore( child, reference )
 
+const insertAfter = ( node, child, reference ) =>
+  node.insertAfter( child, reference )
+
 const DomAdapter = document => {
   const createNode = value => {
     if( is.string( value ) )
@@ -87,7 +90,8 @@ const DomAdapter = document => {
   }
 
   return {
-    getValue, getChildren, createNode, appendChild, removeChild, insertBefore
+    getValue, getChildren, createNode, appendChild, removeChild, insertBefore,
+    insertAfter
   }
 }
 

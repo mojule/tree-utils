@@ -42,6 +42,19 @@ const ObjectAdapter = () => {
       child[ parentSymbol ] = node
 
       node.children.splice( index, 0, child )
+    },
+    insertAfter: ( node, child, reference ) => {
+      const index = node.children.indexOf( reference )
+
+      if( index === -1 )
+        throw Error( 'reference not found in node' )
+
+      if( child[ parentSymbol ] )
+        adapter.removeChild( child[ parentSymbol ], child )
+
+      child[ parentSymbol ] = node
+
+      node.children.splice( index + 1, 0, child )
     }
   }
 
