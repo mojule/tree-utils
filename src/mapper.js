@@ -6,7 +6,7 @@ const Mapper = ( sourceAdapter, targetAdapter ) => {
     const target = targetAdapter.createNode( value )
 
     sourceAdapter.getChildren( source ).forEach( current =>
-      targetAdapter.appendChild( target, map( current ) )
+      targetAdapter.appendChild( target, map( current, targetMapper ) )
     )
 
     return targetMapper( source, target )
