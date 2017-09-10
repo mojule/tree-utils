@@ -1,7 +1,7 @@
 'use strict'
 
 const Mapper = ( sourceAdapter, targetAdapter ) => {
-  const map = source => {
+  const map = ( source, targetMapper = ( source, target ) => target ) => {
     const value = sourceAdapter.getValue( source )
     const target = targetAdapter.createNode( value )
 
@@ -9,7 +9,7 @@ const Mapper = ( sourceAdapter, targetAdapter ) => {
       targetAdapter.appendChild( target, map( current ) )
     )
 
-    return target
+    return targetMapper( source, target )
   }
 
   return map
