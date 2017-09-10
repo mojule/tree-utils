@@ -5,7 +5,7 @@ const parentSymbol = require( '../parent-symbol' )
 const ObjectAdapter = () => {
   const adapter = {
     getValue: node => node.value,
-    getChildren: node => node.children,
+    getChildren: node => node.children || [],
     createNode: value => ({
       value,
       children: []
